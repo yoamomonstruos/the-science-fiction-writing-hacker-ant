@@ -1,120 +1,149 @@
-var DSB = {},
+var boundaries = {},
     el = document.getElementById("content"),
     boxes = [],
-    Ball;
+    timed = false,
+    count = 1;
 
-Ball = (function() {
+var randomise = function( to, from ) {
+  return Math.floor( Math.random() * ( to-from + 1 ) + from );
+};
+
+var chances = function( chance ) {
+  var n = randomise( 0, 100 );
+  
+  if ( n >= chance ) {
+    return true;
+  }
+  else {
+    return false;
+  }
+};
+
+var Ball = (function() {
   
   function Ball(id) {
     this._id = id;
-    this.cid = "p" + id;
-    this.directionRight = 1;
-    this.directionleft = 0;
-    this.x = el.clientWidth / 2 - 20;
-    this.y = el.clientHeight / 2 - 20;
-    
-    this.build();
-    boxes.push(this);
+    this.cid = "c" + this._id;
+    this.direction_top = chances(50);
+    this.direction_left = chances(50);
+    this.horizontal_speed = randomise(1, 10);
+    this.vertical_speed = randomise(1, 10);
   }
   
   Ball.prototype.build = function() {
-    var box = document.createElement("div");
+    var box = document.createElement( "div" ),
+        el = document.getElementById( "content" );
     
-    box.classList.add("box");
+    box.classList.add( "box" );
     box.id = this.cid;
     box.style.left = this.x + "px";
     box.style.top = this.y + "px";
+    box.innerHTML = this._id;
     
-    el.appendChild(box);
-  }
+    el.appendChild( box );
+  };
   
-  Ball.prototype.animate = function() {
+  Ball.prototype.checkBoundaries = function() {
+    var box = document.getElementById( this.cid );
+    
+    if ( box.offsetTop <= 0 ) {
+      this.direction_top = true;
+    }
+    else if ( box.offsetLeft <= 0 ) {
+      this.direction_left = true;
+    }
+    else if ( (box.offsetTop + box.clientHeight) >= boundaries.bottom ) {
+      this.direction_top = false;
+    }
+    else if ( (box.offsetLeft + box.clientWidth) >= boundaries.right ) {
+      this.direction_left = false;
+    }
+  };
+  
+  Ball.prototype.checkCollisions = function() {
+    var _this = this,
+        cid = _this.cid,
+        cel = document.getElementById( cid ),
+        x = cel.offsetLeft,
+        y = cel.offsetTop;
+    
+    for ( var _i = 0; _i < boxes.length; _i++ ) {
+      var box = boxes[_i],
+          el = document.getElementById( box.cid );
+      
+      if ( box.cid === cid ) { return false; }
+      
+      if ( x > el.offsetLeft && x < (el.offsetLeft + el.clientWidth) && y > el.offsetTop && y < (el.offsetTop + el.clientHeight) ) {
+        if ( _this._id === (box._id + 1) && box._id === count ) {
+          console.log(box._id, _this._id, count);
+          boxes.shift();
+          count++;
+        }
+      }
+    }
+  };
+  
+  Ball.prototype.shakeIt = function() {
+    var x, y;
+    
+    if( this.direction_top === true ) { x = "+="; }
+    if( this.direction_top === false ) { x = "-="; }
+    if( this.direction_left === true ) { y = "+="; }
+    if( this.direction_left === false ) { y = "-="; }
+    
+    this.animate( x, y );
+  };
+  
+  Ball.prototype.animate = function( x, y ) {
     var _this = this;
     
-    $( _this ).animate({
-      
+    $("#" + _this.cid ).animate({
+      left: y + _this.horizontal_speed,
+      top: x + _this.vertical_speed
+    }, 20, function() {
+      _this.checkBoundaries();
+      if (timed === true ) { _this.checkCollisions(); }
+      _this.shakeIt();
     });
-  }
+  };
   
   return Ball;
   
 })();
 
-DSB.buildBoxes = function( el, count ) {
-  var widthCentre = el.clientWidth / 2 - 20,
-      heightCentre = el.clientHeight / 2 - 20;
-      
-  DSB.boxes = [];
-  
-  for( var _i = 1; _i <= count; _i++ ) {
-    var box = document.createElement("div");
-    
-    
-    
-    DSB.boxes.push(box);
-  }
-};
 
-
-DSB.setBoundaries = function() {
+var setBoundaries = function() {
   var el = document.getElementById("content");
   
-  DSB.boundaries = {
+  boundaries = {
     top: el.offsetTop,
     left: el.offsetLeft,
     bottom: el.offsetTop + el.clientHeight,
-    right: el.offsetLeft + el.clientWidth
+    right: el.offsetLeft + el.clientWidth - 500
   };
   
   return;
 };
 
-DSB.checkBoundaries = function(el, x, y, s) {
-  var _this = el;
-  el = document.getElementById("content");
-
-  // Check if it colides with boundaries
-  if ( _this.offsetTop <= 0 ) {
-    animateBall(x, "+=", s);
-  }
-  else if ( _this.offsetLeft <= 0) {
-    animateBall("+=", y, s);
-  }
-  else if ( (_this.offsetTop + _this.clientHeight) >= DSB.boundaries.bottom ) {
-    animateBall(x, "-=", s);
-  }
-  else if( (_this.offsetLeft + _this.clientWidth) >= el.clientWidth  ) {
-    animateBall("-=", y, s);
-  }
-  else {
-    animateBall(x, y, s);
-  }
-};
-
-function animateBall(x, y, s) {
-  var balls = $(".box");
-  var el = document.getElementById("content");
-  
-  balls.animate({
-    left: x + s,
-    top: y + s
-  }, 5, function() {
-    var _this = this;
-    DSB.checkBoundaries(_this, x, y, s);
-  });
-}
-
 window.addEventListener("resize", function() {
-  DSB.setBoundaries();
+  setBoundaries();
 });
 
-document.addEventListener("DOMContentLoaded", function() {  
-  DSB.setBoundaries();
-  DSB.buildBoxes(el, 1);
+document.addEventListener("DOMContentLoaded", function() {
+  setBoundaries();
   
-  var ball = new Ball(1);
+  setTimeout( function() {
+    timed = true;
+    console.log(timed);
+  }, 1000);
+  
+  for( var _i = 1; _i <= 3; _i++ ) {
+    var ball = new Ball(_i);
+    ball.build();
+    ball.shakeIt();
+    
+    boxes.push(ball);
+  }
   
   console.log(boxes);
-  
-  // animateBall("-=", "-=", 4);
 });
