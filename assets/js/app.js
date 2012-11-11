@@ -61,23 +61,23 @@ var Ball = (function() {
   };
   
   Ball.prototype.checkCollisions = function() {
-    var _this = this,
-        cid = _this.cid,
-        cel = document.getElementById( cid ),
-        x = cel.offsetLeft,
-        y = cel.offsetTop;
-    
     for ( var _i = 0; _i < boxes.length; _i++ ) {
-      var box = boxes[_i],
-          el = document.getElementById( box.cid );
+      var outerBox = boxes[_i],
+          outerEl = document.getElementById( outerBox.cid );
       
-      if ( box.cid === cid ) { return false; }
-      
-      if ( x > el.offsetLeft && x < (el.offsetLeft + el.clientWidth) && y > el.offsetTop && y < (el.offsetTop + el.clientHeight) ) {
-        if ( _this._id === (box._id + 1) && box._id === count ) {
-          console.log(box._id, _this._id, count);
-          boxes.shift();
-          count++;
+      for ( var _k = 0; _k < boxes.length; _k++ ) {
+        var innerBox = boxes[_k],
+            innerEl = document.getElementById( innerBox.cid );
+        
+              
+        if ( outerEl.offsetLeft < innerEl.offsetLeft && ( outerEl.offsetLeft + outerEl.clientWidth ) > innerEl.offsetLeft &&
+             outerEl.offsetTop < innerEl.offsetTop && ( outerEl.offsetTop + outerEl.clientHeight ) > innerEl.offsetTop ) {
+          
+          if ( outerBox._id === innerBox._id + 1 && innerBox._id === count) {
+            console.log("OVERLAP", outerBox._id, innerBox._id);
+            count++;
+          }
+          
         }
       }
     }
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log(timed);
   }, 1000);
   
-  for( var _i = 1; _i <= 3; _i++ ) {
+  for( var _i = 1; _i <= 10; _i++ ) {
     var ball = new Ball(_i);
     ball.build();
     ball.shakeIt();
