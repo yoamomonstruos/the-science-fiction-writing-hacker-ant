@@ -26,8 +26,9 @@ var Ball = (function() {
     this.cid = "c" + this._id;
     this.direction_top = chances(50);
     this.direction_left = chances(50);
-    this.horizontal_speed = randomise(1, 10);
-    this.vertical_speed = randomise(1, 10);
+    this.horizontal_speed = randomise(1, 15);
+    this.vertical_speed = randomise(1, 15);
+    this.remove = false;
   }
   
   Ball.prototype.build = function() {
@@ -45,7 +46,9 @@ var Ball = (function() {
   
   Ball.prototype.checkBoundaries = function() {
     var box = document.getElementById( this.cid );
-    
+
+    if ( !box ) { return false; }
+
     if ( box.offsetTop <= 0 ) {
       this.direction_top = true;
     }
@@ -58,9 +61,13 @@ var Ball = (function() {
     else if ( (box.offsetLeft + box.clientWidth) >= boundaries.right ) {
       this.direction_left = false;
     }
+    
+    this.checkCollisions();
   };
   
   Ball.prototype.checkCollisions = function() {
+    // if ( timed === false ) { return false; }
+        
     for ( var _i = 0; _i < boxes.length; _i++ ) {
       var outerBox = boxes[_i],
           outerEl = document.getElementById( outerBox.cid );
@@ -68,19 +75,49 @@ var Ball = (function() {
       for ( var _k = 0; _k < boxes.length; _k++ ) {
         var innerBox = boxes[_k],
             innerEl = document.getElementById( innerBox.cid );
-        
               
         if ( outerEl.offsetLeft < innerEl.offsetLeft && ( outerEl.offsetLeft + outerEl.clientWidth ) > innerEl.offsetLeft &&
              outerEl.offsetTop < innerEl.offsetTop && ( outerEl.offsetTop + outerEl.clientHeight ) > innerEl.offsetTop ) {
           
           if ( outerBox._id === innerBox._id + 1 && innerBox._id === count) {
-            console.log("OVERLAP", outerBox._id, innerBox._id);
+            console.log("marked to be removed: " + innerBox._id);
+            innerBox.remove = true;
             count++;
           }
-          
+          else {
+            if ( outerBox.direction_top !== innerBox.direction_top ) {
+              outerBox.direction_top = chances(50);
+              innerBox.direction_top = chances(50);
+            }
+            
+            if ( outerBox.direction_left !== innerBox.direction_left ) {
+              outerBox.direction_left = chances(50);
+              innerBox.direction_left = chances(50);
+            }
+          }
         }
       }
     }
+    
+    this.cleanUp();
+    this.shakeIt();
+  };
+  
+  Ball.prototype.cleanUp = function() {
+    var container = document.getElementById("content");
+    
+    for ( var _i = 0; _i < boxes.length; _i++ ) {
+      var outerBox = boxes[_i],
+          outerEl = document.getElementById( outerBox.cid );
+      
+      if ( outerBox.remove === true ) {
+        boxes.shift();
+        container.removeChild(outerEl);
+      }
+    }
+    
+    var el = document.getElementById("c" + count);
+    el.classList.add("active");
   };
   
   Ball.prototype.shakeIt = function() {
@@ -100,10 +137,8 @@ var Ball = (function() {
     $("#" + _this.cid ).animate({
       left: y + _this.horizontal_speed,
       top: x + _this.vertical_speed
-    }, 20, function() {
+    }, 5, function() {
       _this.checkBoundaries();
-      if (timed === true ) { _this.checkCollisions(); }
-      _this.shakeIt();
     });
   };
   
@@ -132,12 +167,7 @@ window.addEventListener("resize", function() {
 document.addEventListener("DOMContentLoaded", function() {
   setBoundaries();
   
-  setTimeout( function() {
-    timed = true;
-    console.log(timed);
-  }, 1000);
-  
-  for( var _i = 1; _i <= 10; _i++ ) {
+  for( var _i = 1; _i <= 20; _i++ ) {
     var ball = new Ball(_i);
     ball.build();
     ball.shakeIt();

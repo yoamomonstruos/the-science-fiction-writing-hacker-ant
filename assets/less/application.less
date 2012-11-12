@@ -47,10 +47,18 @@ a {
 .box {
 	position: absolute;
 	display: block;
-	height: 50px;
-	width: 50px;
+	height: 20px;
+	width: 20px;
 	left: 49%;
 	top: 49%;
+	text-align: center;
+	color: #FFF;
+	font-weight: bold;
+	line-height: 20px;
 	background: #00ADEF;
 	.border-radius(3px);
+	
+	&.active {
+		background: #222;
+	}
 }

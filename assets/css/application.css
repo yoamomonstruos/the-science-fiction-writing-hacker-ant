@@ -138,12 +138,19 @@ a {
 .box {
   position: absolute;
   display: block;
-  height: 50px;
-  width: 50px;
+  height: 20px;
+  width: 20px;
   left: 49%;
   top: 49%;
+  text-align: center;
+  color: #FFF;
+  font-weight: bold;
+  line-height: 20px;
   background: #00ADEF;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+}
+.box.active {
+  background: #222;
 }
