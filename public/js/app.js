@@ -79,7 +79,7 @@ var Ball = (function() {
         if ( outerEl.offsetLeft < innerEl.offsetLeft && ( outerEl.offsetLeft + outerEl.clientWidth ) > innerEl.offsetLeft &&
              outerEl.offsetTop < innerEl.offsetTop && ( outerEl.offsetTop + outerEl.clientHeight ) > innerEl.offsetTop ) {
           
-          if ( outerBox._id === innerBox._id + 1 && innerBox._id === count) {
+          if ( outerBox._id === innerBox._id + 1 && innerBox._id === count ) {
             console.log("marked to be removed: " + innerBox._id);
             innerBox.remove = true;
             count++;
@@ -111,6 +111,9 @@ var Ball = (function() {
           outerEl = document.getElementById( outerBox.cid );
       
       if ( outerBox.remove === true ) {
+        var no = count * 3;
+        
+        $("#essay *:nth-child(" + count + ")").show();
         boxes.shift();
         container.removeChild(outerEl);
       }
@@ -174,6 +177,4 @@ document.addEventListener("DOMContentLoaded", function() {
     
     boxes.push(ball);
   }
-  
-  console.log(boxes);
 });

@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %title Disserboid
+    %link{ :href => "css/application.css", :rel => "stylesheet", :type => "text/css" }
+  %body
+    #essay
+      - @paragraphs.each do |para|
+        = Kramdown::Document.new(para).to_html
+    #content
+    %script{ :src => "js/libs/jquery/jquery.js" }
+    %script{ :src => "js/app.js" }
