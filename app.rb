@@ -1,6 +1,5 @@
 require "sinatra"
 require "sinatra/reloader"
-require "haml"
 require "kramdown"
 
 def load_file( name )
@@ -21,5 +20,5 @@ get "/" do
   file = load_file("index.md")
   
   @paragraphs = file.split("\n\n")
-  haml :index
+  erb :index
 end

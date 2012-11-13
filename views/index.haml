@@ -8,5 +8,7 @@
       - @paragraphs.each do |para|
         = Kramdown::Document.new(para).to_html
     #content
-    %script{ :src => "js/libs/jquery/jquery.js" }
-    %script{ :src => "js/app.js" }
+      %canvas#canvas{ :resize => true }
+    %script{ :src => "js/libs/paper/paper.js" }
+    %script{ :type => "text/paperscript", :canvas => "canvas" }
+      :javascript
