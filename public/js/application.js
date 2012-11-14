@@ -1,26 +1,23 @@
 // Object Variables
-var Balls, Ball, Box, Essay;
-
-// Functions
-var randomise, chanceIt, innit;
+var Ball,
+    Box,
+    Essay;
 
 // Done
-var start = false;
+var mode = 0;
+var Balls = [];
 var done = false;
+var allowCollisions = false;
 var donePoint = new Point(view.center.x + 250, view.center.y);
 
-// Hold All The Ballz.
-Balls = [];
-
 // Randomise
-randomise = function(to, from) {
+function randomise(to, from) {
   var lemons = Math.floor( Math.random() * (to - from + 1) + from );
   return lemons;
 };
 
-
 // Chance It
-chanceIt = function(probs) {
+function chanceIt(probs) {
   var pears = randomise(0, 100);
   
   if ( pears >= probs ) {
@@ -31,6 +28,85 @@ chanceIt = function(probs) {
   }
 };
 
+function countDown(secs) {
+  var count = secs,
+      el = $("#timer");
+      
+  el.css({
+    top: (view.bounds.height / 2) - (el.height() / 2),
+    left: (view.bounds.width / 2) - el.width()
+  }).show();
+
+
+  var interval = setInterval(function() {
+    if ( count === 0 ) {
+      allowCollisions = true;
+      clearInterval();
+      el.empty().hide();
+      return false;
+    }
+    
+    el.html(count);
+    count--;
+  }, 1000);
+}
+
+// Initialize funciton
+function setup() {
+  $.ajax({
+    url: "/disso",
+    success: function(data) {
+      var showy = new Showdown.converter;
+      Essay = data.split("\n\n");
+
+      for ( var i = 0; i < Essay.length; i++ ) {
+        var that = Essay[i];
+        Essay[i] = showy.makeHtml(that);
+      }
+
+      createBalls( Essay.length );
+    }
+  });
+  
+  var el = $(".intro");
+  
+  el.append('<button id="start-button">Go Fucker Go!</button>');
+};
+
+// Setup balls
+function createBalls(amount) {
+  Balls = [];
+
+  for ( var _i = 0; _i < amount; _i++ ) {
+    new Ball(_i);
+  }
+}
+
+
+// Array.findById
+Array.prototype.findById = function( value ) {
+  var obj;
+
+  for ( var i = 0; i < this.length; i++ ) {
+    if (this[i].id === value) {
+      return this[i];
+    }
+  }
+}
+
+// Array.removeById
+Array.prototype.removeById = function( value ) {
+  var id;
+
+  for ( var i = 0; i < this.length; i++ ) {
+    if ( this[i].id === value ) {
+      id = i;
+    }
+  }
+
+  this.splice(id, 1);
+};
+
 
 // Ball Object
 
@@ -38,14 +114,13 @@ Ball = Base.extend({
   
   initialize: function(id) {
     this.id = id;
-    this.point = Point.random() * view.size;
     this.radius = 20;
-    this.colour = new HsbColor(Math.random() * 360, 1, 1);
+    this.point = Point.random() * view.size
     
     this.directionX = chanceIt(50);
     this.directionY = chanceIt(50);
-    this.speedX = randomise(2, 5);
-    this.speedY = randomise(2, 5);
+    this.speedX = randomise(1, 6);
+    this.speedY = randomise(1, 6);
     
     this.draw();
   },
@@ -83,7 +158,7 @@ Ball = Base.extend({
     }
   },
   
-  checkCollision: function() {
+  checkCollisions: function() {
     for ( var i = 0; i < Balls.length; i++ ) {
       var bond = this.ball.bounds,
           iso = Balls[i].ball.bounds,
@@ -99,17 +174,21 @@ Ball = Base.extend({
         
         this.ball.join( Balls[i].ball );
         
-        var para = Essay[bid];
-        
-        $("#essay").append(para);
-        window.scrollBy(0, $(document).height());
-        
-        Balls.removeById( Balls[i].id );
+        this.renderEssay( bid );
       }
     }
   },
+  
+  renderEssay: function( id ) {
+    var para = Essay[id];
+    
+    $("#essay").append(para);
+    window.scrollBy(0, $(document).height());
+    
+    Balls.removeById( id );
+  },
 
-  move: function() {
+  animateBall: function() {
     if ( this.directionX === true ) {
       this.ball.position.x += this.speedX;
     }
@@ -125,102 +204,62 @@ Ball = Base.extend({
     }
   },
   
-  iterate: function() {
-    if( Balls.length === 1 ) { return false; }
+  bounce: function() {
     this.checkBounds();
-    this.checkCollision();
-    this.move();
+    if ( allowCollisions === true ) {
+      this.checkCollisions();
+    }
+    this.animateBall();
   }
-  
 });
 
 
-// Array.findById
-Array.prototype.findById = function( value ) {
-  var obj;
-  
-  for ( var i = 0; i < this.length; i++ ) {
-    if (this[i].id === value) {
-      return this[i];
-    }
-  }
-}
-
-// Array.removeById
-Array.prototype.removeById = function( value ) {
-  var id;
-
-  for ( var i = 0; i < this.length; i++ ) {
-    if ( this[i].id === value ) {
-      id = i;
-    }
-  }
-
-  this.splice(id, 1);
-};
-
-
 // On frame
-
 var onFrame = function(event) {
-  if ( done === true ) {
-    var vektor = donePoint - Balls[0].ball.position;
+  if ( Balls.length === 1 && mode === 1 ) { mode = 2; return false; }
+  
+  // Start Point
+  if ( mode === 0 || mode === 1 ) {
+    for ( var i = 0; i < Balls.length; i++ ) {
+      Balls[i].bounce();
+    }
+  }
+  
+  // Finish Animation
+  if ( mode === 2 && done === false ) {
+    // Setup some variables to make life easier
+    var id = Balls[0].id,
+        para = Essay[id];
     
+    // Set animation to done
+    // and next mode :-)
+    mode = 3;
+    done = true;
+    
+    $("#essay").append(para);
+    window.scrollBy(0, -$(document).height());
+  }
+  
+  // Move crazy squares
+  if ( mode === 3 && done === true ) {
+    var vektor = donePoint - Balls[0].ball.position;
+
     Balls[0].ball.position += vektor / 30;
     return false;
   }
-  else if ( Balls.length === 1) {
-    var id = Balls[0].id;
-    var para = Essay[id];
-    
-    $("#essay").append(para);
-    done = true;
-    window.scrollBy(0, -$(document).height());
-  }
-  else if ( start === true ){
-    for ( var i = 0; i < Balls.length; i++ ) {
-      Balls[i].iterate();
-    }
-  }
 };
 
-
-// Initialize funciton
-innit = function() {
-  $.ajax({
-    url: "/disso",
-    success: function(data) {
-      var showy = new Showdown.converter;
-      Essay = data.split("\n\n");
-      
-      for ( var i = 0; i < Essay.length; i++ ) {
-        var that = Essay[i];
-        Essay[i] = showy.makeHtml(that);
-      }
-      
-      Balls = [];
-      
-      for ( var i = 0; i < Essay.length; i++ ) {
-        var x = new Ball(i);
-      } 
-    }
-  });
-};
-
+setup();
 
 var button = document.getElementById("start-button");
 
 button.addEventListener("click", function( event ) {
-  var el = $(event.target);
+  var el = $(event.target),
+      intro = $(".intro");
   
-  $('.intro').remove();
+  intro.remove();
+
+  countDown(3);
   
-  start = true;
-  
-  el.remove();
-  
+  mode = 1;
 });
-
-innit();
-
-window.x = Balls;
