@@ -163,13 +163,13 @@ Array.prototype.removeById = function( value ) {
 // On frame
 
 var onFrame = function(event) {
-  if( done === true ) {
+  if ( done === true ) {
     var vektor = donePoint - Balls[0].ball.position;
     
     Balls[0].ball.position += vektor / 30;
     return false;
   }
-  else if( Balls.length === 1) {
+  else if ( Balls.length === 1) {
     var id = Balls[0].id;
     var para = Essay[id];
     
@@ -177,7 +177,7 @@ var onFrame = function(event) {
     done = true;
     window.scrollBy(0, -$(document).height());
   }
-  else {
+  else if ( start === true ){
     for ( var i = 0; i < Balls.length; i++ ) {
       Balls[i].iterate();
     }
@@ -187,43 +187,35 @@ var onFrame = function(event) {
 
 // Initialize funciton
 innit = function() {
-  if ( start === true ) {
-    
-    if ( Balls.length === 1 ) {
-      Balls[0].ball.remove();
-      Balls.removeById( Balls[0].id );
-    }
-    
-    $.ajax({
-      url: "/disso",
-      success: function(data) {
-        var showy = new Showdown.converter;
-        Essay = data.split("\n\n");
-        
-        for ( var i = 0; i < Essay.length; i++ ) {
-          var that = Essay[i];
-          Essay[i] = showy.makeHtml(that);
-        }
-        
-        Balls = [];
-        
-        for ( var i = 0; i < Essay.length; i++ ) {
-          var x = new Ball(i);
-        } 
+  $.ajax({
+    url: "/disso",
+    success: function(data) {
+      var showy = new Showdown.converter;
+      Essay = data.split("\n\n");
+      
+      for ( var i = 0; i < Essay.length; i++ ) {
+        var that = Essay[i];
+        Essay[i] = showy.makeHtml(that);
       }
-    });
-    
-    start = false;
-  }
+      
+      Balls = [];
+      
+      for ( var i = 0; i < Essay.length; i++ ) {
+        var x = new Ball(i);
+      } 
+    }
+  });
 };
 
-var button = document.getElementById("button");
+
+var button = document.getElementById("start-button");
 
 button.addEventListener("click", function( event ) {
   var el = $(event.target);
   
+  $('.intro').remove();
+  
   start = true;
-  innit();
   
   el.remove();
   
