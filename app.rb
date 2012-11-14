@@ -17,8 +17,10 @@ def load_file( name )
 end
 
 get "/" do
-  file = load_file("index.md")
-  
-  @paragraphs = file.split("\n\n")
   erb :index
+end
+
+get "/disso" do
+  file = load_file("index.md")
+  file
 end
