@@ -99,8 +99,8 @@ blockquote:after {
 body {
   margin: 0;
   padding: 0;
-  color: #333;
-  font-family: sans-serif;
+  color: #202020;
+  font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-size: 18px;
   line-height: 26px;
   background: #FFF;
@@ -119,10 +119,7 @@ a {
   position: relative;
   width: 500px;
   padding: 40px;
-}
-#essay div {
-  border-left: 10px solid #222;
-  padding: 20px 40px;
+  z-index: 20;
 }
 #content {
   position: fixed;
@@ -154,10 +151,9 @@ h2 {
   line-height: 30px;
 }
 p {
-  font-family: "proxima-nova", sans-serif;
+  font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-size: 15px;
   line-height: 25px;
-  color: #252519;
 }
 .box {
   position: absolute;
@@ -177,10 +173,4 @@ p {
 }
 .box.active {
   background: #222;
-}
-a#button {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 2000;
 }
