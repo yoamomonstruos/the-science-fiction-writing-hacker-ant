@@ -132,10 +132,21 @@ a {
   bottom: 0;
   overflow: hidden;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-bottom: 20px;
+}
 h1 {
-  font-weight: bold;
+  font-family: "skolar", serif;
+  font-weight: 400;
   font-size: 24px;
   line-height: 34px;
+  margin-bottom: 30px;
 }
 h2 {
   font-weight: bold;
@@ -143,6 +154,7 @@ h2 {
   line-height: 30px;
 }
 p {
+  font-family: "proxima-nova", sans-serif;
   font-size: 15px;
   line-height: 25px;
   color: #252519;
@@ -165,4 +177,10 @@ p {
 }
 .box.active {
   background: #222;
+}
+a#button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
 }
