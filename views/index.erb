@@ -1,170 +1,24 @@
 <!doctype html>
 <html>
   <head>
-    <title>Disserboid</title>
+    <title>A queen ant, a hacker and a sci-fi writer walk into a bar.</title>
     <link href="css/application.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="//use.typekit.net/sct0gqh.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   </head>
   <body>
     <div id="essay">
-      <div id="p0">
-        <%= Kramdown::Document.new(@paragraphs[0]).to_html %>
+      <h1>A queen ant, a hacker and a sci-fi writer walk into a bar.</h1>
+      <div class="intro">
+        <button id="start-button">Go Fucker Go!</button>
       </div>
     </div>
     <div id="content">
       <canvas id="canvas" resize></div>
     </div>
     <script src="js/libs/jquery/jquery.js"></script>
+    <script src="js/libs/showdown/showdown.js"></script>
     <script src="js/libs/paper/paper.js"></script>
-    <script>
-      newElement = function(id, colour) {
-        var Essay = <%= @paragraphs %>;
-        var colourCSS = colour.toCssString()
-        $("#essay").append("<div id='p" + id + "' style='border-left-color: " + colourCSS + "'><p>" + Essay[id] + "</p></div>");
-        
-        window.scrollBy(0, $(document).height());
-      }
-    </script>
-    <script type="text/paperscript" canvas="canvas">
-      // Hold all our balls
-      var Balls = [];
-      var done = false;
-      var start = false;
-      
-      // Randomise function
-      var randomise = function( to, from ) {
-        var x = Math.floor( Math.random() * ( to - from + 1 ) + from );
-        return x;
-      };
-      
-      // Chance function :-)
-      var chance = function ( probs ) {
-        var n = randomise( 0, 100 );
-        if ( n >= probs ) {
-          return true;
-        }
-        else {
-          return false;
-        }
-      };
-      
-      // Ball Object
-      var Ball = Base.extend({
-      
-        initialize: function( id ) {
-          this.id = id;
-          this.point = Point.random() * view.size;
-          this.radius = 10;
-          this.colour = new HsbColor(Math.random() * 360, 1, 1 );
-      
-          this.directionX = chance(50);
-          this.directionY = chance(50);
-          this.speedX = randomise( 2, 10 );
-          this.speedY = randomise( 2, 10 );
-      
-          this.draw();
-        },
-      
-        draw: function() {
-          this.ball = new Path.Circle( this.point, this.radius );
-          this.ball.fillColor = this.colour;
-      
-          Balls.push( this );
-        },
-      
-        iterate: function() {
-          this.checkBounds();
-          this.checkCollision();
-          this.move();
-        },
-      
-        move: function() {
-      
-          if ( this.directionX === true ) {
-            this.ball.position.x += this.speedX;
-          }
-          else {
-            this.ball.position.x -= this.speedX;
-          }
-      
-          if ( this.directionY === true ) {
-            this.ball.position.y += this.speedY;
-          }
-          else {
-            this.ball.position.y -= this.speedY;
-          }
-      
-        },
-      
-        checkBounds: function() {
-          if ( this.ball.bounds.x <= 0 ) { this.directionX = true; }
-          if ( this.ball.bounds.x + this.ball.bounds.width >= view.bounds.width ) { this.directionX = false; }
-          if ( this.ball.bounds.y <= 0 ) { this.directionY = true; }
-          if ( this.ball.bounds.y + this.ball.bounds.height >= view.bounds.height ) { this.directionY = false; }
-        },
-      
-        checkCollision: function() {
-          for ( var i = 0; i < Balls.length; i++ ) {
-            var bond = this.ball.bounds,
-                iso = Balls[i].ball.bounds;
-      
-            if ( bond.x < iso.x && (bond.x + bond.width) > iso.x &&
-                 bond.y < iso.y && (bond.y + bond.width) > iso.y) {
-                  
-              newElement(this.id, this.colour);
-                    
-              Balls.removeById( this.id );
-            }
-      
-          }
-        }
-      
-      });
-      
-      Array.prototype.removeById = function( value ) {
-        var id;
-      
-        for ( var i = 0; i < this.length; i++ ) {
-          if ( this[i].id === value ) {
-            id = i;
-            this[i].ball.remove();
-          }
-        }
-      
-        this.splice(id, 1);
-      };
-      
-      
-      
-      function onFrame( event ) {
-        if ( Balls.length < 1 || done === true ) {  return false; }
-        else if ( Balls.length === 1) {
-          var el = Balls[0];
-          newElement(el.id, el.colour);
-          Balls.removeById( el.id );
-          done = true;
-        }
-        for ( var i = 0; i < Balls.length; i++ ) {
-          Balls[i].iterate();
-        }
-      }
-      
-      function onMouseDown(event) {
-        if ( start === false ) {
-          init(59);
-          start = true;
-        }
-        else {
-          return false;
-        }
-      }
-      
-      init = function(num) {
-        for ( var i = 1; i <= num; i++ ) {
-          var x = new Ball(i);
-        }
-      
-        return "YAAAHHH";
-      };
-    </script>
+    <script src="js/application.js" type="text/paperscript" canvas="canvas"></script>
   </body>
 </html>
