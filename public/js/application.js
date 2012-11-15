@@ -4,11 +4,8 @@ var Ball,
     Essay;
 
 // Done
-var mode = 0;
+var mode, done, allowCollisions, donePoint;
 var Balls = [];
-var done = false;
-var allowCollisions = false;
-var donePoint = new Point(view.center.x + 250, view.center.y);
 
 // Randomise
 function randomise(to, from) {
@@ -39,10 +36,11 @@ function countDown(secs) {
 
 
   var interval = setInterval(function() {
+    console.log("Fired");
     if ( count === 0 ) {
       allowCollisions = true;
-      clearInterval();
-      el.empty().hide();
+      clearInterval(interval);
+      el.html("&nbsp;").hide();
       return false;
     }
     
@@ -53,6 +51,19 @@ function countDown(secs) {
 
 // Initialize funciton
 function setup() {
+  if ( Balls.length === 1 ) {
+    Balls[0].ball.remove();
+  }
+  
+  mode = 0;
+  done = false;
+  allowCollisions = false;
+  donePoint = new Point(view.center.x + 250, view.center.y);
+  
+  $("#essay .body").empty()
+  
+  Balls = new Array();
+  
   $.ajax({
     url: "/disso",
     success: function(data) {
@@ -67,10 +78,6 @@ function setup() {
       createBalls( Essay.length );
     }
   });
-  
-  var el = $(".intro");
-  
-  el.append('<button id="start-button">Go Fucker Go!</button>');
 };
 
 // Setup balls
@@ -182,7 +189,7 @@ Ball = Base.extend({
   renderEssay: function( id ) {
     var para = Essay[id];
     
-    $("#essay").append(para);
+    $("#essay .body").append(para);
     window.scrollBy(0, $(document).height());
     
     Balls.removeById( id );
@@ -216,14 +223,15 @@ Ball = Base.extend({
 
 // On frame
 var onFrame = function(event) {
-  if ( Balls.length === 1 && mode === 1 ) { mode = 2; return false; }
-  
+  console.log(mode, done, allowCollisions)
   // Start Point
   if ( mode === 0 || mode === 1 ) {
     for ( var i = 0; i < Balls.length; i++ ) {
       Balls[i].bounce();
     }
   }
+  
+  if ( Balls.length === 1 && mode === 1 ) { mode = 2; return false; }
   
   // Finish Animation
   if ( mode === 2 && done === false ) {
@@ -236,8 +244,12 @@ var onFrame = function(event) {
     mode = 3;
     done = true;
     
-    $("#essay").append(para);
+    $("#essay .body").append(para);
     window.scrollBy(0, -$(document).height());
+    
+    $("#buttons").show();
+    
+    console.log("done");
   }
   
   // Move crazy squares
@@ -251,15 +263,26 @@ var onFrame = function(event) {
 
 setup();
 
-var button = document.getElementById("start-button");
-
-button.addEventListener("click", function( event ) {
+$("#start-button").click(function(event) {
   var el = $(event.target),
       intro = $(".intro");
   
-  intro.remove();
-
+  intro.hide();
+  
   countDown(3);
   
   mode = 1;
+});
+
+$("#restart-button").click(function(event) {
+  var el = $(event.target),
+      intro = $(".intro");;
+  
+  setup();
+  
+  $("#buttons").hide();
+  
+  countDown(3);
+  mode = 1;
+  
 });
