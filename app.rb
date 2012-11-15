@@ -1,6 +1,5 @@
 require "sinatra"
 require "sinatra/reloader"
-require "kramdown"
 
 def load_file( name )
   file_contents = ""
