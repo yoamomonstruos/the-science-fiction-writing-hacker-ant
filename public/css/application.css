@@ -124,7 +124,7 @@ a {
 #essay {
   position: relative;
   width: 500px;
-  padding: 40px;
+  padding: 40px 0 40px 40px;
   z-index: 20;
 }
 #content {

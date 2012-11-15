@@ -222,8 +222,7 @@ Ball = Base.extend({
 
 
 // On frame
-var onFrame = function(event) {
-  console.log(mode, done, allowCollisions)
+function onFrame(event) {
   // Start Point
   if ( mode === 0 || mode === 1 ) {
     for ( var i = 0; i < Balls.length; i++ ) {
@@ -248,8 +247,6 @@ var onFrame = function(event) {
     window.scrollBy(0, -$(document).height());
     
     $("#buttons").show();
-    
-    console.log("done");
   }
   
   // Move crazy squares
@@ -260,6 +257,10 @@ var onFrame = function(event) {
     return false;
   }
 };
+
+function onResize(event) {
+  donePoint = new Point(view.center.x + 250, view.center.y);
+}
 
 setup();
 
