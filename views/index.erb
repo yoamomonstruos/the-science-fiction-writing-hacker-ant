@@ -7,17 +7,21 @@
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   </head>
   <body>
-    <div id="buttons">
-      <button id="restart-button">Rejumble</button>
-      <button id="real-button">Read the real essay</button>
-    </div>
+    <!-- Essay Section -->
     <div id="essay">
+      <!-- Title -->
       <h1>A queen ant, a hacker and a sci-ﬁ writer walk into a bar.</h1>
+      
+      <!-- Intro -->
       <div class="intro">
-        <p>An essay by <a href="#">Thomas Bates</a></p>
+        <p>An essay by <a href="http://twitter.com/yoamomonstruos">Thomas Bates</a></p>
         <button id="start-button">View the essay</button>
       </div>
+      
+      <!-- Essay body -->
       <div class="body"></div>
+      
+      <!-- The References -->
       <div class="references">
         <h3><span>References</span></h3>
         <ul>
@@ -38,9 +42,26 @@
         </ul>
       </div>
     </div>
+    <!-- End Essay -->
+    
+    <!-- Main Section -->
     <div id="content">
+      <!-- Buttons -->
+      <div id="buttons">
+        <button id="restart-button">Rejumble</button>
+        <button id="real-button">Read the real essay</button>
+      </div>
+      <!-- End Buttons -->
+      
+      <!-- Canvas -->
       <canvas id="canvas" resize></div>
+      <!-- End Canvas -->
     </div>
+    <!-- End Section -->
+    
+    <div id="footer">Grab some <a href="https://github.com/yoamomonstruos/the-science-fiction-writing-hacker-ant">source</a>.</div>
+    
+    <!-- JAVASCRIPTS -->
     <script src="js/libs/jquery/jquery.js"></script>
     <script src="js/libs/showdown/showdown.js"></script>
     <script src="js/libs/mousetrap/mousetrap.js"></script>

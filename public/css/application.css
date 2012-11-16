@@ -214,6 +214,19 @@ button:hover {
 .intro p a {
   color: #00adef;
 }
+#footer {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-family: Menlo, Consolas, Monaco, "Lucida Console", monospace;
+  font-size: 12px;
+}
+#footer a {
+  font-weight: 600;
+}
+#footer a:hover {
+  border-bottom: 1px solid #333;
+}
 .references {
   display: none;
   margin-top: 60px;
