@@ -103,7 +103,7 @@ body {
   font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-size: 18px;
   line-height: 26px;
-  background: #FFF;
+  background: #f8f8f8;
   -webkit-font-smoothing: antialiased;
 }
 * {
@@ -193,7 +193,7 @@ button {
   cursor: pointer;
   padding: 8px 12px;
   border: 2px solid #00ADEF;
-  background: #FFF;
+  background: #f8f8f8;
   color: #00ADEF;
   font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-size: 16px;
