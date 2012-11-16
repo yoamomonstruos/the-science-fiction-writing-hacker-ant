@@ -192,7 +192,7 @@ blockquote p strong {
 button {
   cursor: pointer;
   padding: 8px 12px;
-  border: 1px solid #00ADEF;
+  border: 2px solid #00ADEF;
   background: #FFF;
   color: #00ADEF;
   font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
