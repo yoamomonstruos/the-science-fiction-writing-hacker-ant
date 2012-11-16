@@ -313,6 +313,10 @@ $("#real-button").click(function(event) {
   mode = 1;
 });
 
+Mousetrap.bind('h a c k e r', function() {
+  $("head link").attr("href", "css/hacker.css");
+});
+
 $(document).ready(function() {
   setup();
 });
