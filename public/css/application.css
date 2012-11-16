@@ -237,3 +237,6 @@ button:hover {
 .references ul li a {
   color: #00ADEF;
 }
+.references ul li:last-child {
+  margin-bottom: 0;
+}
