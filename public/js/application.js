@@ -50,7 +50,7 @@ function setup() {
   done = false;
   ordered = false;
   allowCollisions = false;
-  donePoint = new Point(view.center.x + 250, view.center.y);
+  donePoint = new Point(view.center.x + 300, view.center.y);
   
   $("#essay .body").empty()
   

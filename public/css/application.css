@@ -156,6 +156,7 @@ blockquote {
   color: #999;
   font-style: italic;
   margin-top: -20px;
+  margin-bottom: 60px;
 }
 .intro p a {
   color: #00adef;
@@ -195,16 +196,17 @@ blockquote p strong {
 }
 button {
   cursor: pointer;
-  padding: 10px 15px 9px;
-  border: none;
-  background: #00ADEF;
-  color: #FFF;
+  padding: 8px 12px;
+  border: 1px solid #00ADEF;
+  background: #FFF;
+  color: #00ADEF;
   font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
 button:hover {
-  background: #006389;
+  background: #00ADEF;
+  color: #FFF;
 }
