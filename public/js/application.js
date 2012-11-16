@@ -4,7 +4,7 @@ var Ball,
     Essay;
 
 // Done
-var mode, done, allowCollisions, donePoint;
+var mode, count, ordered, done, allowCollisions, donePoint;
 var Balls = [];
 
 // Randomise
@@ -26,25 +26,15 @@ function chanceIt(probs) {
 };
 
 function countDown(secs) {
-  var count = secs,
-      el = $("#timer");
-      
-  el.css({
-    top: (view.bounds.height / 2) - (el.height() / 2),
-    left: (view.bounds.width / 2) - el.width()
-  }).show();
-
+  var count = secs;
 
   var interval = setInterval(function() {
-    console.log("Fired");
     if ( count === 0 ) {
       allowCollisions = true;
       clearInterval(interval);
-      el.html("&nbsp;").hide();
       return false;
     }
-    
-    el.html(count);
+
     count--;
   }, 1000);
 }
@@ -56,7 +46,9 @@ function setup() {
   }
   
   mode = 0;
+  count = 0;
   done = false;
+  ordered = false;
   allowCollisions = false;
   donePoint = new Point(view.center.x + 250, view.center.y);
   
@@ -179,15 +171,26 @@ Ball = Base.extend({
         this.speedY = Balls[i].speedY;
         this.speedX = Balls[i].speedX;
         
+        // Render shiz.
         this.ball.join( Balls[i].ball );
-        
         this.renderEssay( bid );
+        
+        if( ordered === true ) {
+          count++;
+        }
       }
     }
   },
   
   renderEssay: function( id ) {
-    var para = Essay[id];
+    var para;
+    
+    if( ordered === true ) {
+      para = Essay[count];
+    }
+    else {
+      para = Essay[id];
+    }
     
     $("#essay .body").append(para);
     window.scrollBy(0, $(document).height());
@@ -235,8 +238,16 @@ function onFrame(event) {
   // Finish Animation
   if ( mode === 2 && done === false ) {
     // Setup some variables to make life easier
-    var id = Balls[0].id,
-        para = Essay[id];
+    var id = Balls[0].id;
+    
+    var para;
+    
+    if( ordered === true ) {
+      para = Essay[count];
+    }
+    else {
+      para = Essay[id];
+    }
     
     // Set animation to done
     // and next mode :-)
@@ -262,28 +273,46 @@ function onResize(event) {
   donePoint = new Point(view.center.x + 250, view.center.y);
 }
 
-setup();
-
 $("#start-button").click(function(event) {
   var el = $(event.target),
       intro = $(".intro");
   
   intro.hide();
+  // ordered = true;
+
   
-  countDown(3);
+  countDown(1);
   
   mode = 1;
 });
 
 $("#restart-button").click(function(event) {
   var el = $(event.target),
-      intro = $(".intro");;
+      intro = $(".intro");
   
   setup();
   
   $("#buttons").hide();
   
-  countDown(3);
+  countDown(1);
+  ordered = false;
   mode = 1;
   
+});
+
+$("#real-button").click(function(event) {
+  var el = $(event.target),
+      intro = $(".intro");
+  
+  setup();
+  
+  $("#buttons").hide();
+  
+  countDown(1);
+  ordered = true;
+  mode = 1;
+});
+
+$(document).ready(function() {
+  setup();
 });

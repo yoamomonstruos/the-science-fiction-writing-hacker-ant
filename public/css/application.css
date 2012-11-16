@@ -123,7 +123,7 @@ a {
 }
 #essay {
   position: relative;
-  width: 500px;
+  width: 600px;
   padding: 40px 0 40px 40px;
   z-index: 20;
 }
@@ -148,42 +148,63 @@ h3,
 h4,
 h5,
 h6,
-p {
-  margin-bottom: 20px;
+p,
+blockquote {
+  margin-bottom: 30px;
+}
+.intro p {
+  color: #999;
+  font-style: italic;
+  margin-top: -20px;
+}
+.intro p a {
+  color: #00adef;
 }
 h1 {
-  font-family: "skolar", serif;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 34px;
+  font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 38px;
   margin-bottom: 30px;
 }
 h2 {
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: 600;
+  font-size: 22px;
   line-height: 30px;
 }
 p {
+  font-family: "skolar", serif;
+  font-size: 18px;
+  line-height: 32px;
+}
+em {
+  color: #999;
+  font-style: italic;
+}
+blockquote {
+  margin: 40px 0;
+  padding-left: 30px;
+  border-left: 3px solid #CCC;
+}
+blockquote p {
+  margin-bottom: 10px;
+}
+blockquote p strong {
   font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 15px;
-  line-height: 25px;
+  font-weight: 600;
 }
-.box {
-  position: absolute;
-  display: block;
-  height: 20px;
-  width: 20px;
-  left: 49%;
-  top: 49%;
-  text-align: center;
-  color: #FFF;
-  font-weight: bold;
-  line-height: 20px;
+button {
+  cursor: pointer;
+  padding: 10px 15px 9px;
+  border: none;
   background: #00ADEF;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  color: #FFF;
+  font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
 }
-.box.active {
-  background: #222;
+button:hover {
+  background: #006389;
 }
