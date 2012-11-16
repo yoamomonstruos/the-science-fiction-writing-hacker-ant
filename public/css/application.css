@@ -99,7 +99,7 @@ blockquote:after {
 body {
   margin: 0;
   padding: 0;
-  color: #202020;
+  color: #333;
   font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-size: 18px;
   line-height: 26px;
@@ -152,15 +152,6 @@ p,
 blockquote {
   margin-bottom: 30px;
 }
-.intro p {
-  color: #999;
-  font-style: italic;
-  margin-top: -20px;
-  margin-bottom: 60px;
-}
-.intro p a {
-  color: #00adef;
-}
 h1 {
   font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-weight: 600;
@@ -172,6 +163,10 @@ h2 {
   font-weight: 600;
   font-size: 22px;
   line-height: 30px;
+}
+h3 {
+  font-size: 16px;
+  font-weight: 600;
 }
 p {
   font-family: "skolar", serif;
@@ -209,4 +204,36 @@ button {
 button:hover {
   background: #00ADEF;
   color: #FFF;
+}
+.intro p {
+  color: #999;
+  font-style: italic;
+  margin-top: -20px;
+  margin-bottom: 60px;
+}
+.intro p a {
+  color: #00adef;
+}
+.references {
+  display: none;
+  margin-top: 60px;
+}
+.references h3 {
+  margin-bottom: 30px;
+}
+.references h3 span {
+  border-bottom: 2px solid #333;
+}
+.references ul li {
+  width: 400px;
+  margin-bottom: 15px;
+  font-family: "skolar", serif;
+  font-size: 15px;
+  line-height: 24px;
+}
+.references ul li em {
+  color: #333;
+}
+.references ul li a {
+  color: #00ADEF;
 }

@@ -41,6 +41,8 @@ function countDown(secs) {
 
 // Initialize funciton
 function setup() {
+  $(".references").hide();
+  
   if ( Balls.length === 1 ) {
     Balls[0].ball.remove();
   }
@@ -258,6 +260,10 @@ function onFrame(event) {
     window.scrollBy(0, -$(document).height());
     
     $("#buttons").show();
+    
+    if ( ordered === true ) {
+      $(".references").show();
+    }
   }
   
   // Move crazy squares
@@ -313,8 +319,28 @@ $("#real-button").click(function(event) {
   mode = 1;
 });
 
-Mousetrap.bind('h a c k e r', function() {
-  $("head link").attr("href", "css/hacker.css");
+// Little bits n bobs
+Mousetrap.bind('f', function() {
+  for ( var i = 0; i < Balls.length; i++ ) {
+    Balls[i].speedX += 3;
+    Balls[i].speedY += 3;
+  }
+});
+
+Mousetrap.bind('s', function() {
+  for ( var i = 0; i < Balls.length; i++ ) {
+    Balls[i].speedX -= 3;
+    Balls[i].speedY -= 3;
+  }
+});
+
+Mousetrap.bind('r', function() {
+  for ( var i = 0; i < Balls.length; i++ ) {
+    Balls[i].speedX = randomise(1, 6);
+    Balls[i].speedY = randomise(1, 6);
+    Balls[i].directionX = chanceIt(50);
+    Balls[i].directionY = chanceIt(50);
+  }
 });
 
 $(document).ready(function() {
