@@ -96,7 +96,7 @@ var AntHacker = AntHacker || {
     return this;
   }
 
-  Ant.prototype.checkCollisions = function checkCollisions() {
+  Ant.prototype.goCannibal = function goCannibal() {
     var baseAnt = this,
         _i,
         _testAnt,

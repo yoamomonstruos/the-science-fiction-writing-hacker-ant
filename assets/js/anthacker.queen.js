@@ -11,7 +11,7 @@ var AntHacker = AntHacker || {
 
     view.onFrame = function(event) {
       for (var key in global.Colony) {
-        global.Colony[key].checkBounds().checkCollisions().march();
+        global.Colony[key].checkBounds().goCannibal().march();
       }
     }
   }
