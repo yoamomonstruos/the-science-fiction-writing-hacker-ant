@@ -1,1 +1,2 @@
-web: bundle exec ruby app.rb -p $PORT -s puma
+web: jekyll serve --watch --config _config.yml
+sass: sass --watch assets/_sass:assets/css
