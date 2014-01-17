@@ -28,6 +28,8 @@ var AntHacker = AntHacker || {
       rotation: this.thinkOfANumber(-3, 3)
     };
 
+    this.paragraph = global.Paragraphs[this._id];
+
     return this;
   }
 
@@ -35,13 +37,16 @@ var AntHacker = AntHacker || {
     this.path = new Path.RegularPolygon({
       center: this.pos.startPoint,
       sides: 6,
-      radius: (view.size.width / view.size.height) * 5,
+      radius: this.calculateRadius(),
       selected: true,
-      // selectedColor: this.grabWarPaint()
       selectedColor: "red"
     });
 
     return this;
+  }
+
+  Ant.prototype.calculateRadius = function calculateRadius() {
+    return 5 + (20 - 5) * (this.paragraph.length - 0) / (2000 - 0);
   }
 
   Ant.prototype.joinColony = function joinColony() {
@@ -121,7 +126,13 @@ var AntHacker = AntHacker || {
         intersections = ant1.path.getIntersections(ant2.path);
 
         if (intersections.length) {
+          var $body = document.querySelector('body');
+          $body.insertAdjacentHTML('beforeend', global.converter.makeHtml(ant2.paragraph));
+          window.scrollBy(0, document.body.clientHeight)
+
           ant1.goCancerous(ant2);
+          ant1.pos.directionLon = (ant1.pos.directionLon === true) ? false : true;
+          ant1.pos.directionLat = (ant1.pos.directionLat === true) ? false : true;
         }
       }
     }
@@ -159,17 +170,6 @@ var AntHacker = AntHacker || {
     else {
 
     }
-  }
-
-  Ant.prototype.grabWarPaint = function grabWarPaint() {
-    var letters = '0123456789ABCDEF'.split(''),
-        color = '#';
-
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.round(Math.random() * 15)];
-    }
-
-    return color;
   }
 
   global.Ant = Ant;

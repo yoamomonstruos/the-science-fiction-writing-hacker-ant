@@ -16,7 +16,9 @@ var AntHacker = AntHacker || {
   Farm.prototype.initialize = function initialize() {
     paper.setup(this.$canvas);
 
-    for ( var _i = 0; _i < 60; _i++ ) {
+    var Writer = new global.Writer();
+
+    for ( var _i = 0; _i < global.Paragraphs.length; _i++ ) {
       new global.Ant({ _id: _i });
     }
 
