@@ -26,9 +26,6 @@ var AntHacker = AntHacker || {
 
           global.Colony[key].path.position.x += _x / 30;
           global.Colony[key].path.position.y += _y / 30;
-          // if (global.Colony[key].pos.rotation < 25) {
-          //   global.Colony[key].pos.rotation++
-          // }
           global.Colony[key].path.rotate(1);
         }
       }
