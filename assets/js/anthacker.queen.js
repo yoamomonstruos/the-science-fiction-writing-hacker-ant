@@ -10,10 +10,10 @@ var AntHacker = AntHacker || {
     var _this = this;
     this.options = options || {};
 
-    this.finishLine = new Point(view.center.x, view.center.y);
+    this.finishLine = new Point(view.center.x + 230, view.center.y);
 
     view.onResize = function(event) {
-      _this.finishLine = new Point(view.center.x, view.center.y);
+      _this.finishLine = new Point(view.center.x + 230, view.center.y);
     }
 
     view.onFrame = function(event) {

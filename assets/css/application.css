@@ -11,3 +11,8 @@ canvas {
   bottom: 0;
   margin: 0;
   padding: 0; }
+
+article {
+  display: block;
+  margin: 30px;
+  width: 400px; }

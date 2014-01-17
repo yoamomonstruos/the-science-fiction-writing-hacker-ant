@@ -126,7 +126,7 @@ var AntHacker = AntHacker || {
         intersections = ant1.path.getIntersections(ant2.path);
 
         if (intersections.length) {
-          var $body = document.querySelector('body');
+          var $body = document.querySelector('#hemingway');
           $body.insertAdjacentHTML('beforeend', global.converter.makeHtml(ant2.paragraph));
           window.scrollBy(0, document.body.clientHeight)
 
