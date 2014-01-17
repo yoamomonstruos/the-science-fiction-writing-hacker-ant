@@ -35,9 +35,10 @@ var AntHacker = AntHacker || {
     this.path = new Path.RegularPolygon({
       center: this.pos.startPoint,
       sides: 6,
-      radius: (view.size.width / view.size.height) * 10,
+      radius: (view.size.width / view.size.height) * 5,
       selected: true,
-      selectedColor: this.grabWarPaint()
+      // selectedColor: this.grabWarPaint()
+      selectedColor: "red"
     });
 
     return this;
@@ -120,7 +121,7 @@ var AntHacker = AntHacker || {
         intersections = ant1.path.getIntersections(ant2.path);
 
         if (intersections.length) {
-          ant1.goCannibal(ant2);
+          ant1.goCancerous(ant2);
         }
       }
     }
@@ -139,6 +140,24 @@ var AntHacker = AntHacker || {
       ant2.path.scale(1.1);
       ant1.path.remove();
       delete global.Colony[ant1._id];
+    }
+  }
+
+  Ant.prototype.goCancerous = function goCancerous(ant2) {
+    var ant1 = this;
+    if (ant1.path.area > ant2.path.area) {
+      var _temp = ant1.path.unite(ant2.path);
+
+      ant1.path.remove();
+      ant2.path.remove();
+
+      ant1.path = _temp;
+      ant1.path.selectedColor = "red";
+      ant1.path.selected = true;
+      delete global.Colony[ant2._id];
+    }
+    else {
+
     }
   }
 
