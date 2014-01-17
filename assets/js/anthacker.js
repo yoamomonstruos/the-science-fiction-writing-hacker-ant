@@ -8,6 +8,8 @@ var AntHacker = AntHacker || {
 window.onload = function onload() {
   paper.install(window);
 
+  AntHacker.converter = new Showdown.converter();
+
   window.HackAllTheAnts = new AntHacker.Farm({
     canvasId: 'vanGogh'
   });
