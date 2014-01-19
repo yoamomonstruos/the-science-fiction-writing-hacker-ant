@@ -13,4 +13,9 @@ window.onload = function onload() {
   window.HackAllTheAnts = new AntHacker.Farm({
     canvasId: 'vanGogh'
   });
+
+  var btn = document.querySelector('.loading__btn');
+  btn.addEventListener("click", function() {
+    AntHacker.mode = 1;
+  });
 }

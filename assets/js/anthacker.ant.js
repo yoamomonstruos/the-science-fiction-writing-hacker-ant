@@ -126,9 +126,11 @@ var AntHacker = AntHacker || {
         intersections = ant1.path.getIntersections(ant2.path);
 
         if (intersections.length) {
-          // ant1.goCancerous(ant2);
-          // ant1.pos.directionLon = (ant1.pos.directionLon === true) ? false : true;
-          // ant1.pos.directionLat = (ant1.pos.directionLat === true) ? false : true;
+          if(global.mode === 1) {
+            ant1.goCancerous(ant2);
+            ant1.pos.directionLon = (ant1.pos.directionLon === true) ? false : true;
+            ant1.pos.directionLat = (ant1.pos.directionLat === true) ? false : true;
+          }
         }
       }
     }

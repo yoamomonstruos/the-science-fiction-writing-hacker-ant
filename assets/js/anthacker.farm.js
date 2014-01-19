@@ -10,6 +10,7 @@ var AntHacker = AntHacker || {
   function Farm(options) {
     this.options = options || {};
     this.$canvas = document.getElementById(this.options.canvasId);
+    global.mode = 0;
     this.initialize();
   }
 
