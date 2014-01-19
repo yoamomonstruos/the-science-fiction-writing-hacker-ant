@@ -2,3 +2,4 @@ name: A queen ant, a hacker and a sci-fi writer walk into a bar.
 markdown: redcarpet
 url: http://localhost:8888
 port: 8888
+permalink: pretty
