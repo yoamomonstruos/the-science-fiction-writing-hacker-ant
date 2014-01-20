@@ -24,6 +24,10 @@ var AntHacker = AntHacker || {
           var _x = _this.finishLine.x - global.Colony[key].path.position.x,
               _y = _this.finishLine.y - global.Colony[key].path.position.y;
 
+          if (global.paragraphsCount === global.Paragraphs.length - 1) {
+            global.Colony[key].write();
+          }
+
           global.Colony[key].path.position.x += _x / 30;
           global.Colony[key].path.position.y += _y / 30;
           global.Colony[key].path.rotate(1);
