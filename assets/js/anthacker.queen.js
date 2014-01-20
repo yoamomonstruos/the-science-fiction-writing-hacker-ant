@@ -28,6 +28,7 @@ var AntHacker = AntHacker || {
 
           if (global.paragraphsCount === global.Paragraphs.length - 1) {
             global.Colony[key].write();
+            window.scrollBy(0, -document.body.clientHeight);
           }
 
           global.Colony[key].path.position.x += _x / 30;

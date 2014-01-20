@@ -127,7 +127,12 @@ ul {
   color: #FFF;
   background: #1d232d;
   border: 2px solid #1d232d;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px; }
   .loading__btn:hover {
     background: none;
     color: #1d232d; }
