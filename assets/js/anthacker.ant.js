@@ -126,7 +126,7 @@ var AntHacker = AntHacker || {
         intersections = ant1.path.getIntersections(ant2.path);
 
         if (intersections.length) {
-          if(global.currentState === 1 || global.currentState === 2) {
+          if (global.currentState === 1 || global.currentState === 2) {
             ant1.goCancerous(ant2);
             ant1.pos.directionLon = (ant1.pos.directionLon === true) ? false : true;
             ant1.pos.directionLat = (ant1.pos.directionLat === true) ? false : true;
@@ -168,6 +168,18 @@ var AntHacker = AntHacker || {
       ant2.write();
       delete global.Colony[ant2._id];
     }
+    else {
+      var _temp = ant2.path.unite(ant1.path);
+
+      ant1.path.remove();
+      ant2.path.remove();
+
+      ant2.path = _temp;
+      ant2.path.selectedColor = "red";
+      ant2.path.selected = true;
+      ant1.write();
+      delete global.Colony[ant1._id];
+    }
 
     return this;
   }
@@ -175,12 +187,21 @@ var AntHacker = AntHacker || {
   Ant.prototype.write = function write() {
     var $body = document.querySelector('#hemingway');
 
-    $body.insertAdjacentHTML(
-      'beforeend',
-      global.converter.makeHtml(
-        global.Paragraphs[global.paragraphsCount]
-      )
-    );
+
+    if (global.currentState === 1) {
+      $body.insertAdjacentHTML(
+        'beforeend',
+        global.converter.makeHtml(this.paragraph)
+      );
+    }
+    else {
+      $body.insertAdjacentHTML(
+        'beforeend',
+        global.converter.makeHtml(
+          global.Paragraphs[global.paragraphsCount]
+        )
+      );
+    }
 
     window.scrollBy(0, document.body.clientHeight);
     global.paragraphsCount += 1;

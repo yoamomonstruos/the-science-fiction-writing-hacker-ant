@@ -80,6 +80,10 @@ ul {
     padding-left: 20px;
     margin-bottom: 15px;
   }
+
+  &:last-child {
+    font-size: 14px;
+  }
 }
 
 .loading {

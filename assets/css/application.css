@@ -70,6 +70,8 @@ ul {
     border-left: 1px solid #1d232d;
     padding-left: 20px;
     margin-bottom: 15px; }
+  ul:last-child {
+    font-size: 14px; }
 
 .loading {
   position: absolute;
