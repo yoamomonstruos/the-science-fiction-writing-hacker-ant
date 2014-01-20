@@ -4,20 +4,20 @@ title: A queen ant, a hacker and a sci-fi writer walk into a bar.
 ---
 
 <div class="controls">
-  <a class="controls__item randomise">Randomise</a>
-  <a class="controls__item ordered">Order</a>
+  <a class="controls__item" data-btn="random">Randomise</a>
+  <a class="controls__item" data-btn="order">Order</a>
 </div>
 
-<header class="loading">
-  <a class="loading__btn">Start</a>
-</header>
+<div class="loading">
+  <a class="loading__btn" data-btn="start">Start</a>
+</div>
 
 <article id="hemingway"></article>
 <canvas id="vanGogh" resize></canvas>
 
 <footer class="footer">
   <span class="footer__item">
-    Word + Code by <a href="http://tombates.co" target="_blank">Tom Bates</a>
+    Words + Code by <a href="http://tombates.co" target="_blank">Tom Bates</a>
   </span>
   <span class="footer__item">
     <a href="https://github.com/yoamomonstruos/the-science-fiction-writing-hacker-ant" target="_blank">Huh?</a>
@@ -25,6 +25,7 @@ title: A queen ant, a hacker and a sci-fi writer walk into a bar.
 </footer>
 
 <!-- Scriptz -->
+<script src="{{ site.url }}/assets/js/lib/jeesh.min.js"></script>
 <script src="{{ site.url }}/assets/js/lib/showdown.js"></script>
 <script src="{{ site.url }}/assets/js/lib/paper.js"></script>
 <script src="{{ site.url }}/assets/js/anthacker.writer.js"></script>
