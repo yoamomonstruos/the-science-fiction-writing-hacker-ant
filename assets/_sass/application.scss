@@ -50,7 +50,7 @@ article {
   display: block;
   position: relative;
   max-width: 500px;
-  margin: 30px;
+  margin: 30px 30px 100px;
   font-size: 15px;
   line-height: 1.75em;
   z-index: 10;
@@ -83,6 +83,36 @@ ul {
 
   &:last-child {
     font-size: 14px;
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 0 30px 15px;
+  z-index: 30;
+
+  .footer__item {
+    margin-right: 10px;
+    color: lighten(#1d232d, 30);
+    font-size: 14px;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.6);
+
+    a {
+      color: #1d232d;
+
+      &:hover {
+        border-bottom: 1px solid #1d232d;
+      }
+    }
+
+    &:last-child {
+      float: right;
+      margin-right: 0;
+    }
   }
 }
 

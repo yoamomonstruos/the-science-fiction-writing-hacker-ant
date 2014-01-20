@@ -7,9 +7,8 @@ var AntHacker = AntHacker || {
 /* Setup Modes */
 AntHacker.states = {
   intro: 0,
-  anarchy: 1,
-  concensus: 2,
-  finished: 3
+  marching: 1,
+  finished: 2
 };
 
 /* set current state */
@@ -22,8 +21,9 @@ window.onload = function onload() {
 
   AntHacker.converter = new Showdown.converter();
 
-  window.HackAllTheAnts = new AntHacker.Farm({
-    canvasId: 'vanGogh'
+  AntHacker.live = new AntHacker.Farm({
+    canvasId: 'vanGogh',
+    wordMode: false
   });
 
 
@@ -35,7 +35,7 @@ window.onload = function onload() {
     $loading.classList.add("is-hidden");
 
     setTimeout(function() {
-      AntHacker.currentState = AntHacker.states.anarchy;
+      AntHacker.currentState = AntHacker.states.marching;
     }, 1500);
   });
 }

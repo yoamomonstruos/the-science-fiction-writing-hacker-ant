@@ -46,7 +46,7 @@ article {
   display: block;
   position: relative;
   max-width: 500px;
-  margin: 30px;
+  margin: 30px 30px 100px;
   font-size: 15px;
   line-height: 1.75em;
   z-index: 10; }
@@ -72,6 +72,27 @@ ul {
     margin-bottom: 15px; }
   ul:last-child {
     font-size: 14px; }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 0 30px 15px;
+  z-index: 30; }
+  .footer .footer__item {
+    margin-right: 10px;
+    color: #596b8a;
+    font-size: 14px;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.6); }
+    .footer .footer__item a {
+      color: #1d232d; }
+      .footer .footer__item a:hover {
+        border-bottom: 1px solid #1d232d; }
+    .footer .footer__item:last-child {
+      float: right;
+      margin-right: 0; }
 
 .loading {
   position: absolute;

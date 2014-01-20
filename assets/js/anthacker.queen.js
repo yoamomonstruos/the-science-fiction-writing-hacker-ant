@@ -20,6 +20,8 @@ var AntHacker = AntHacker || {
       var colonySize = _this.monitorTheColony();
 
       if (colonySize === 1) {
+        global.currentState = 2;
+
         for (var key in global.Colony) {
           var _x = _this.finishLine.x - global.Colony[key].path.position.x,
               _y = _this.finishLine.y - global.Colony[key].path.position.y;

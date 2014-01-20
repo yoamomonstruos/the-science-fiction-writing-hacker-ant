@@ -125,12 +125,10 @@ var AntHacker = AntHacker || {
 
         intersections = ant1.path.getIntersections(ant2.path);
 
-        if (intersections.length) {
-          if (global.currentState === 1 || global.currentState === 2) {
-            ant1.goCancerous(ant2);
-            ant1.pos.directionLon = (ant1.pos.directionLon === true) ? false : true;
-            ant1.pos.directionLat = (ant1.pos.directionLat === true) ? false : true;
-          }
+        if (intersections.length && global.currentState === 1) {
+          ant1.goCancerous(ant2);
+          ant1.pos.directionLon = (ant1.pos.directionLon === true) ? false : true;
+          ant1.pos.directionLat = (ant1.pos.directionLat === true) ? false : true;
         }
       }
     }
@@ -188,7 +186,7 @@ var AntHacker = AntHacker || {
     var $body = document.querySelector('#hemingway');
 
 
-    if (global.currentState === 1) {
+    if (global.wordMode === false) {
       $body.insertAdjacentHTML(
         'beforeend',
         global.converter.makeHtml(this.paragraph)

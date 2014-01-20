@@ -10,20 +10,21 @@ var AntHacker = AntHacker || {
   function Farm(options) {
     this.options = options || {};
     this.$canvas = document.getElementById(this.options.canvasId);
+    global.wordMode = this.options.wordMode;
     this.initialize();
   }
 
   Farm.prototype.initialize = function initialize() {
     paper.setup(this.$canvas);
 
-    var Writer = new global.Writer();
+    this.writer = new global.Writer();
     global.paragraphsCount = 0;
 
     for ( var _i = 0; _i < global.Paragraphs.length; _i++ ) {
       new global.Ant({ _id: _i });
     }
 
-    var Queen = new global.Queen();
+    this.queen = new global.Queen();
     return this;
   }
 
