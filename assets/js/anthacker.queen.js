@@ -10,10 +10,10 @@ var AntHacker = AntHacker || {
     var _this = this;
     this.options = options || {};
 
-    this.finishLine = new Point(view.center.x, view.center.y);
+    this.finishLine = new Point(view.center.x + 230, view.center.y);
 
     view.onResize = function(event) {
-      _this.finishLine = new Point(view.center.x, view.center.y);
+      _this.finishLine = new Point(view.center.x + 230, view.center.y);
     }
 
     view.onFrame = function(event) {
@@ -23,6 +23,10 @@ var AntHacker = AntHacker || {
         for (var key in global.Colony) {
           var _x = _this.finishLine.x - global.Colony[key].path.position.x,
               _y = _this.finishLine.y - global.Colony[key].path.position.y;
+
+          if (global.paragraphsCount === global.Paragraphs.length - 1) {
+            global.Colony[key].write();
+          }
 
           global.Colony[key].path.position.x += _x / 30;
           global.Colony[key].path.position.y += _y / 30;

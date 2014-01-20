@@ -1,3 +1,5 @@
+# A queen ant, a hacker and a sci-ﬁ writer walk into a bar.
+
 Humankind has always had a bit of an obsession with creating a utopian society, not that any have yet come to fruition. A fair number of ideas on how a utopian society could be achieved appear in the form of science fiction novels and other mainstream media. It fascinates me that an apparent trend is forming that links science to the forming of a perfect society, which could imply that it is not in human nature to live harmoniously and prosperously. More importantly perhaps this states that we require some kind of higher being to keep us in balance, whether it be biological or technological. It is interesting to think that there may have been some point where we stopped believing that a philosophical solution was the answer and instead chose to adopt technology to fix flaws in our nature. Is the solution to a utopian society based in creating a technological solution that will keep us on the right path and solve all the problems we have today, or should we listen to the warnings of science fiction and steer clear of a truly conscious artificial being? Before I look at answering the preceding question I want to explain what I will be looking at and why, as the subject area is potentially huge.
 
 ## What’s in the box?
@@ -133,3 +135,21 @@ In regards to the idea of create truly self conscious artificial intelligent mac
 Neal Stephenson wrote an article questioning how the increasingly pessimistic writings of science fiction writers could be affecting the rate at which we develop new technology as younger inventors feel the world is doomed to this bleak idea of the future. His idea is to bring more optimism back to science fiction and bring about a change in the ideas of what could be in store for us in the future if we embrace technology *(Stephenson, 2010)*. However, how do we know if we should heed the warnings of pessimistic science fiction writers or embrace the thing of which they seem so terrified? What seems to be driving science fiction writers towards pessimism is the idea that it’s hard to tell whether the technology we are building can be used to impact on our daily lives for good or for malicious intentions *(idem)*.
 
 It's impossible to predict what the future has in store for us. Who knows if we will be able to create a truly conscious artificial intelligence that will be able to think and understand in the same way as a human and this would to a certain extent depend on how you understand what it is to be human. Can a machine have aspirations, dreams or true emotions that aren't just simulations? Could this type of software become the answer to a perfect world? Perhaps a more important question: is it possible to achieve perfection or is the answer to create a slightly more balanced world with a scattering of imperfections?
+
+
+### References
+
+*    Asmiov, I 1950, *I, robot*, Gnome Press, New York.
+*    Christian, B 2011, *The most human human*, Doubleday, New York.
+*    Curtis, A 2011, *All watched over by machines of loving grace*, 4 July 2011 online video, viewed 20 September 2011, [vimeo.com/25966415](http://vimeo.com/25966415)
+*    Gordon, D 2010, *Ant encounters: interaction networks and colony behaviour (primers in complex systems)*, Princeton University Press.
+*    Johnson, S 2001, *Emergence: the connected lives of ants, brains, cities, and software*, Penguin Press, London.
+*    *TRON: Legacy* 2010, Film. United States, Walt Disney Productions. Directed by Joseph Kosinski.
+*    *TRON* 1982, Film. United States, Walt Disney Productions. Directed by Steven Lisberger.
+*    Rudenberg J, Siders D, Stuart J,  Wojciechowski L, *Tent *    the decentralized social network*, Tent, viewed 10th Oct 2012, [tent.io/about](https://tent.io/about)
+*    Shirky, C 2008, *Here comes everybody: how change happens when people come together*, Penguin Press, London.
+*    Shirky, C 2010, *Cognitive surplus: creativity and generosity in a connected age*, Allen Lane, London.
+*    Stephenson, N 2012, *Dear science fiction writers: stop being so pessimistic*, Smithsonian, viewed 24th October 2012, [smithsonianmag.com/science-nature/Dear-Science-Fiction-Writers-Stop-Being-So-Pessimistic.html](http://www.smithsonianmag.com/science-nature/Dear-Science-Fiction-Writers-Stop-Being-So-Pessimistic.html)
+*    Stone, B 2010, *Hello World, Twitter*, viewed 20 Oct 2012, [blog.twitter.com/2010/04/hello-world.html](http://blog.twitter.com/2010/04/hello-world.html)
+*    *The Matrix* 1999, Film. United States, Warner Bros. Pictures. Directed and written by Andy and Lana Wachowski.
+*    *Emergence*, Wikipedia, viewed 4th September 2012, [wikipedia.org/wiki/emergence](https://en.wikipedia.org/wiki/Emergence)

@@ -126,13 +126,11 @@ var AntHacker = AntHacker || {
         intersections = ant1.path.getIntersections(ant2.path);
 
         if (intersections.length) {
-          var $body = document.querySelector('body');
-          $body.insertAdjacentHTML('beforeend', global.converter.makeHtml(ant2.paragraph));
-          window.scrollBy(0, document.body.clientHeight)
-
-          ant1.goCancerous(ant2);
-          ant1.pos.directionLon = (ant1.pos.directionLon === true) ? false : true;
-          ant1.pos.directionLat = (ant1.pos.directionLat === true) ? false : true;
+          if(global.currentState === 1 || global.currentState === 2) {
+            ant1.goCancerous(ant2);
+            ant1.pos.directionLon = (ant1.pos.directionLon === true) ? false : true;
+            ant1.pos.directionLat = (ant1.pos.directionLat === true) ? false : true;
+          }
         }
       }
     }
@@ -145,11 +143,13 @@ var AntHacker = AntHacker || {
     if (ant1.path.area > ant2.path.area) {
       ant1.path.scale(1.1);
       ant2.path.remove();
+      ant2.write();
       delete global.Colony[ant2._id];
     }
     else {
       ant2.path.scale(1.1);
       ant1.path.remove();
+      ant1.write();
       delete global.Colony[ant1._id];
     }
   }
@@ -165,11 +165,25 @@ var AntHacker = AntHacker || {
       ant1.path = _temp;
       ant1.path.selectedColor = "red";
       ant1.path.selected = true;
+      ant2.write();
       delete global.Colony[ant2._id];
     }
-    else {
 
-    }
+    return this;
+  }
+
+  Ant.prototype.write = function write() {
+    var $body = document.querySelector('#hemingway');
+
+    $body.insertAdjacentHTML(
+      'beforeend',
+      global.converter.makeHtml(
+        global.Paragraphs[global.paragraphsCount]
+      )
+    );
+
+    window.scrollBy(0, document.body.clientHeight);
+    global.paragraphsCount += 1;
   }
 
   global.Ant = Ant;
