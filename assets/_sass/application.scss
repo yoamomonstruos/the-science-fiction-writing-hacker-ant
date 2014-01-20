@@ -66,6 +66,22 @@ blockquote {
   padding-left: 20px;
 }
 
+a {
+  color: blue;
+  text-decoration: none;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+
+  li {
+    border-left: 1px solid #1d232d;
+    padding-left: 20px;
+    margin-bottom: 15px;
+  }
+}
+
 .loading {
   position: absolute;
   width: 100%;
