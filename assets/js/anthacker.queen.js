@@ -27,6 +27,8 @@ var AntHacker = AntHacker || {
               _y = _this.finishLine.y - global.Colony[key].path.position.y;
 
           if (global.paragraphsCount === global.Paragraphs.length - 1) {
+            var $controls = document.querySelector('.controls');
+            $controls.classList.add('is-active');
             global.Colony[key].write();
             window.scrollBy(0, -document.body.clientHeight);
           }

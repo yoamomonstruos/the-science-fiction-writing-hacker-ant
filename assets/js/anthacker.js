@@ -28,7 +28,9 @@ window.onload = function onload() {
 
 
   var $loading = document.querySelector('.loading'),
-      $btn = document.querySelector('.loading__btn');
+      $btn = document.querySelector('.loading__btn')
+      $ordered = document.querySelector('.ordered')
+      $article = document.querySelector('article');
 
   $btn.addEventListener("click", function(event) {
     event.preventDefault();
@@ -37,5 +39,14 @@ window.onload = function onload() {
     setTimeout(function() {
       AntHacker.currentState = AntHacker.states.marching;
     }, 1500);
+  });
+
+  $ordered.addEventListener("click", function(event) {
+    event.preventDefault();
+    AntHacker.Colony = {};
+    project.clear();
+    delete AntHacker.queen;
+    delete AntHacker.writer;
+    AntHacker.live.initialize();
   });
 }
