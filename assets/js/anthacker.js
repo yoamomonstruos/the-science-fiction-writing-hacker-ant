@@ -14,8 +14,16 @@ window.onload = function onload() {
     canvasId: 'vanGogh'
   });
 
-  var btn = document.querySelector('.loading__btn');
-  btn.addEventListener("click", function() {
-    AntHacker.mode = 1;
+
+  var $loading = document.querySelector('.loading'),
+      $btn = document.querySelector('.loading__btn');
+
+  $btn.addEventListener("click", function(event) {
+    event.preventDefault();
+    $loading.classList.add("is-hidden");
+
+    setTimeout(function() {
+      AntHacker.mode = 1;
+    }, 1500);
   });
 }
